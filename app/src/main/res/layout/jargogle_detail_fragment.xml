@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".JargogleDetailActivity">
+
+    <LinearLayout
+        android:id="@+id/jargogle_detail_layout_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/jargogle_title_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/jargogle_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Jargogle title"
+            android:inputType="textPersonName"
+            android:maxLength="@integer/max_title_length" />
+
+        <TextView
+            android:id="@+id/jargogle_data_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Data"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/jargogle_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="top|left"
+            android:hint="@string/data_dummy"
+            android:inputType="textMultiLine"
+            android:maxLength="@integer/max_data_length" />
+
+        <TextView
+            android:id="@+id/jargogle_details_chainlen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/chain_len"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/chain_len"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/chain_len_hint"
+            android:inputType="number"
+            android:maxLength="@integer/chain_len_limit" />
+
+        <TextView
+            android:id="@+id/jargogle_details_seed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/seed"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/seed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/seed_hint"
+            android:inputType="number"
+            android:maxLength="@integer/chain_seed_limit" />
+
+        <Switch
+            android:id="@+id/jargogle_encryption_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:switchPadding="16dp"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</ScrollView>
