@@ -246,97 +246,109 @@ public class JargogleDetailFragment extends Fragment {
                 dataEditText.setEnabled(false);
                 chainLenField.setEnabled(false);
                 chainSeedField.setEnabled(false);
-
-                JargogleCodeManager jargogleCodeManager =
-                        new JargogleCodeManager (
-                                Long.parseLong(chainLenField.getText ().length () > 0
-                                        ? chainLenField.getText ().toString () : "1"),
-                                Long.parseLong(chainSeedField.getText ().length () > 0
-                                        ? chainSeedField.getText ().toString () : "1"),
-                                JargogleCodeManager.ENCODING);
-
-                resultMessage = jargogleCodeManager.getJargogleChain ()
-                        .processChain (dataEditText.getText ().toString ().toLowerCase ());
-                resultMessage = '\0' + resultMessage;
-
-                dataEditText.setText (resultMessage);
-                encodeSwitch.setText (getString (R.string.jargogle_encoded));
-                jargogle.setEncoded (Jargogle.ENCODED);
-
-                Toast toast = Toast.makeText (getContext (),
-                        R.string.mes_encoded,Toast.LENGTH_SHORT);
-                toast.setGravity (Gravity.TOP,0,0);
-                toast.show ();
-
+                processEncryption();
             }else{
+                if (jargogle.getPasswd() != null) {
+                    AlertDialog.Builder builder =
+                            new AlertDialog.Builder(new ContextThemeWrapper(
+                                    fragment.getActivity(), R.style.AppTheme));
+                    builder.setTitle("Enter password:");
+                    final EditText input = new EditText(getContext());
+                    input.setInputType(
+                            InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    builder.setView(input);
 
+                    builder.setPositiveButton("OK",
+                            (dialog, which) -> {
+                                if (input.getText().toString().equals(jargogle.getPasswd())
+                                        || jargogle.getPasswd() == null) {
+                                    titleEditText.setEnabled(true);
+                                    dataEditText.setEnabled(true);
+                                    chainLenField.setEnabled(true);
+                                    chainSeedField.setEnabled(true);
+                                    processDecryption();
+                                } else {
+                                    encodeSwitch.setOnCheckedChangeListener(null);
+                                    encodeSwitch.setChecked(true);
+                                    encodeSwitch.setOnCheckedChangeListener(
+                                            new EncodeDecodeSwitchListener(fragment));
+                                    Toast toast = Toast.makeText(getContext(),
+                                            R.string.wrong_passwd, Toast.LENGTH_SHORT);
+                                    toast.setGravity(Gravity.TOP, 0, 0);
+                                    toast.show();
+                                }
+                            });
 
-                AlertDialog.Builder builder =
-                        new AlertDialog.Builder(new ContextThemeWrapper (
-                                fragment.getActivity (),R.style.AppTheme));
-                builder.setTitle("Enter password:");
-                final EditText input = new EditText(getContext ());
-                input.setInputType(
-                        InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                builder.setView(input);
+                    builder.setNegativeButton("Cancel",
+                            (dialog, which) -> {
+                                encodeSwitch.setOnCheckedChangeListener(null);
+                                encodeSwitch.setChecked(true);
+                                encodeSwitch.setOnCheckedChangeListener(
+                                        new EncodeDecodeSwitchListener(fragment));
+                                dialog.cancel();
+                            });
 
-                builder.setPositiveButton("OK",
-                        (dialog, which) -> {
-                            if (input.getText().toString().equals (jargogle.getPasswd ())
-                                    || jargogle.getPasswd () == null){
-                                titleEditText.setEnabled(true);
-                                dataEditText.setEnabled(true);
-                                chainLenField.setEnabled(true);
-                                chainSeedField.setEnabled(true);
-
-                                JargogleCodeManager jargogleCodeManager =
-                                        new JargogleCodeManager (
-                                                Long.parseLong (chainLenField.getText ()
-                                                        .length () > 0
-                                                        ? chainLenField
-                                                        .getText ().toString () : "1"),
-                                                Long.parseLong (chainSeedField.getText ()
-                                                        .length () > 0
-                                                        ? chainSeedField
-                                                        .getText ().toString () : "1"),
-                                                JargogleCodeManager.DECODING);
-
-                                resultMessage = jargogleCodeManager.getJargogleChain ()
-                                        .processChain (dataEditText
-                                                .getText ().toString ().toLowerCase ());
-                                resultMessage.replace ('\0',' ');
-
-                                dataEditText.setText (resultMessage);
-                                encodeSwitch.setText (getString (R.string.jargogle_decoded));
-                                jargogle.setEncoded (Jargogle.DECODED);
-
-                                Toast toast = Toast.makeText (getContext (),
-                                        R.string.mes_decoded, Toast.LENGTH_SHORT);
-                                toast.setGravity (Gravity.TOP, 0, 0);
-                                toast.show ();
-                            }else{
-                                encodeSwitch.setOnCheckedChangeListener (null);
-                                encodeSwitch.setChecked (true);
-                                encodeSwitch.setOnCheckedChangeListener (
-                                        new EncodeDecodeSwitchListener (fragment));
-                                Toast toast = Toast.makeText (getContext (),
-                                        R.string.wrong_passwd, Toast.LENGTH_SHORT);
-                                toast.setGravity (Gravity.TOP, 0, 0);
-                                toast.show ();
-                            }
-                        });
-
-                builder.setNegativeButton("Cancel",
-                        (dialog, which) -> {
-                            encodeSwitch.setOnCheckedChangeListener (null);
-                            encodeSwitch.setChecked (true);
-                            encodeSwitch.setOnCheckedChangeListener (
-                                    new EncodeDecodeSwitchListener (fragment));
-                            dialog.cancel();
-                        });
-
-                builder.show();
+                    builder.show();
+                }else{
+                    titleEditText.setEnabled(true);
+                    dataEditText.setEnabled(true);
+                    chainLenField.setEnabled(true);
+                    chainSeedField.setEnabled(true);
+                    processDecryption();
+                }
             }
+        }
+
+        private void processDecryption(){
+            JargogleCodeManager jargogleCodeManager =
+                    new JargogleCodeManager(
+                            Long.parseLong(chainLenField.getText()
+                                    .length() > 0
+                                    ? chainLenField
+                                    .getText().toString() : "1"),
+                            Long.parseLong(chainSeedField.getText()
+                                    .length() > 0
+                                    ? chainSeedField
+                                    .getText().toString() : "1"),
+                            JargogleCodeManager.DECODING);
+
+            resultMessage = jargogleCodeManager.getJargogleChain()
+                    .processChain(dataEditText
+                            .getText().toString().toLowerCase());
+            resultMessage = resultMessage.replace('\0', ' ').substring(1);
+
+            dataEditText.setText(resultMessage);
+            encodeSwitch.setText(getString(R.string.jargogle_decoded));
+            jargogle.setEncoded(Jargogle.DECODED);
+
+            Toast toast = Toast.makeText(getContext(),
+                    R.string.mes_decoded, Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP, 0, 0);
+            toast.show();
+        }
+
+        private void processEncryption(){
+            JargogleCodeManager jargogleCodeManager =
+                    new JargogleCodeManager (
+                            Long.parseLong(chainLenField.getText ().length () > 0
+                                    ? chainLenField.getText ().toString () : "1"),
+                            Long.parseLong(chainSeedField.getText ().length () > 0
+                                    ? chainSeedField.getText ().toString () : "1"),
+                            JargogleCodeManager.ENCODING);
+
+            resultMessage = jargogleCodeManager.getJargogleChain ()
+                    .processChain (dataEditText.getText ().toString ().toLowerCase ());
+            resultMessage = '\0' + resultMessage;
+
+            dataEditText.setText (resultMessage);
+            encodeSwitch.setText (getString (R.string.jargogle_encoded));
+            jargogle.setEncoded (Jargogle.ENCODED);
+
+            Toast toast = Toast.makeText (getContext (),
+                    R.string.mes_encoded,Toast.LENGTH_SHORT);
+            toast.setGravity (Gravity.TOP,0,0);
+            toast.show ();
+
         }
     }
 }

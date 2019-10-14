@@ -30,6 +30,7 @@ public class JargogleDetailActivity extends AppCompatActivity {
             String message = getIntent ().getStringExtra (Intent.EXTRA_TEXT);
             jargogle.setData (getIntent ().getStringExtra (Intent.EXTRA_TEXT));
 
+            System.out.println("MESSAGE "+message);
             if (message.contains ("\0")){
                 jargogle.setEncoded (Jargogle.ENCODED);
             }

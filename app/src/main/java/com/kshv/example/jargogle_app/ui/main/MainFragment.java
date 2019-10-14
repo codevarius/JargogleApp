@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kshv.example.jargogle_app.AboutActivity;
 import com.kshv.example.jargogle_app.JargogleDetailActivity;
 import com.kshv.example.jargogle_app.R;
 import com.kshv.example.jargogle_app.model.Jargogle;
@@ -75,7 +76,7 @@ public class MainFragment extends Fragment {
                 adapter.notifyDataSetChanged ();
                 return true;
             case R.id.option_about:
-                startActivity (new Intent (getContext (),AboutActivity.class));
+                startActivity (new Intent (getContext (), AboutActivity.class));
                 return true;
             default: return super.onOptionsItemSelected (item);
         }

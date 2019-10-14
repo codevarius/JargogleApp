@@ -15,7 +15,7 @@
     <string name="max_width_title_input_text">You have reached 23 chars length limit!</string>
     <string name="default_jargogle_title">your first jargogle!</string>
     <string name="default_jargogle_data">Example jargogle data
-        which contains some secret info and bla bla bla
+        which contains some secret info.
     </string>
     <string name="send_intent_title">Send to:</string>
     <string name="secret_key">Secret key</string>
@@ -30,4 +30,6 @@
     <string name="wrong_passwd">Wrong password!</string>
     <string name="jargogole_encoded">Can\'t remove encoded jargogle</string>
     <string name="about">About</string>
+    <string name="jargogle">Jargogle</string>
+    <string name="created_by_lofibit">created by LoFiBit</string>
 </resources>
