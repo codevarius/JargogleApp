@@ -9,15 +9,15 @@
     <LinearLayout
         android:id="@+id/jargogle_detail_layout_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/jargogle_title_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title"
+            android:text="@string/title"
             android:textSize="20sp" />
 
         <EditText
@@ -25,15 +25,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Jargogle title"
+            android:hint="@string/jargogle_title"
             android:inputType="textPersonName"
-            android:maxLength="@integer/max_title_length" />
+            android:maxLength="@integer/max_title_length"
+            tools:ignore="Autofill" />
 
         <TextView
             android:id="@+id/jargogle_data_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Data"
+            android:paddingTop="@dimen/details_fields_padding"
+            android:text="@string/data"
             android:textSize="20sp" />
 
         <EditText
@@ -41,15 +43,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:gravity="top|left"
-            android:hint="@string/data_dummy"
+            android:gravity="top|start"
+            android:hint="@string/enter_text"
             android:inputType="textMultiLine"
-            android:maxLength="@integer/max_data_length" />
+            android:maxLength="@integer/max_data_length"
+            tools:ignore="Autofill" />
 
         <TextView
             android:id="@+id/jargogle_details_chainlen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="@dimen/details_fields_padding"
             android:text="@string/chain_len"
             android:textSize="20sp" />
 
@@ -60,12 +64,14 @@
             android:ems="10"
             android:hint="@string/chain_len_hint"
             android:inputType="number"
-            android:maxLength="@integer/chain_len_limit" />
+            android:maxLength="@integer/chain_len_limit"
+            tools:ignore="Autofill" />
 
         <TextView
             android:id="@+id/jargogle_details_seed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="@dimen/details_fields_padding"
             android:text="@string/seed"
             android:textSize="20sp" />
 
@@ -76,12 +82,14 @@
             android:ems="10"
             android:hint="@string/seed_hint"
             android:inputType="number"
-            android:maxLength="@integer/chain_seed_limit" />
+            android:maxLength="@integer/chain_seed_limit"
+            tools:ignore="Autofill" />
 
         <Switch
             android:id="@+id/jargogle_encryption_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingTop="@dimen/details_fields_padding"
             android:switchPadding="16dp"
             android:textSize="20sp" />
 

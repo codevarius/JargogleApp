@@ -11,8 +11,7 @@
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="28sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/list_item_icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/list_item_icon" />
@@ -21,11 +20,11 @@
         android:id="@+id/list_item_icon"
         android:layout_width="50dp"
         android:layout_height="0dp"
-        android:contentDescription="TODO"
         android:src="@drawable/ic_encode_list_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/title"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
