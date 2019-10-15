@@ -144,7 +144,7 @@ public class MainFragment extends Fragment {
         }
     }
 
-    public class SwipeToDeleteJargogleCallback extends ItemTouchHelper.SimpleCallback {
+    private class SwipeToDeleteJargogleCallback extends ItemTouchHelper.SimpleCallback {
         private Drawable icon;
         private ColorDrawable background;
 
