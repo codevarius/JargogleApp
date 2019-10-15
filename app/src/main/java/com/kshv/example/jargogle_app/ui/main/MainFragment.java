@@ -85,7 +85,7 @@ public class MainFragment extends Fragment {
             case R.id.option_add:
                 provider.addJargogle (new Jargogle ());
                 adapter.updateJargogleList (provider.getJargogleList ());
-                adapter.notifyDataSetChanged ();
+                adapter.notifyItemInserted (provider.getJargogleList ().size ()-1);
                 return true;
             case R.id.option_about:
                 startActivity (new Intent (getContext (), AboutActivity.class));
@@ -203,7 +203,7 @@ public class MainFragment extends Fragment {
                 toast.show ();
             }
             adapter.updateJargogleList (provider.getJargogleList ());
-            adapter.notifyDataSetChanged ();
+            adapter.notifyItemRemoved (position);
         }
     }
 }
