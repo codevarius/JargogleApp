@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -23,11 +24,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.kshv.example.jargogle_app.AboutActivity;
 import com.kshv.example.jargogle_app.JargogleDetailActivity;
 import com.kshv.example.jargogle_app.R;
 import com.kshv.example.jargogle_app.model.Jargogle;
 import com.kshv.example.jargogle_app.model.JargogleDataProvider;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -44,6 +47,7 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate (R.layout.main_fragment, container, false);
         provider = JargogleDataProvider.getInstance (getContext ());
         recyclerView = view.findViewById (R.id.list);
@@ -59,7 +63,6 @@ public class MainFragment extends Fragment {
         ItemTouchHelper itemTouchHelper = new
                 ItemTouchHelper (new SwipeToDeleteJargogleCallback());
         itemTouchHelper.attachToRecyclerView (recyclerView);
-
         recyclerView.setAdapter (adapter);
         setHasOptionsMenu (true);
         return view;
@@ -179,7 +182,6 @@ public class MainFragment extends Fragment {
                 int iconLeft = itemView.getRight() - iconMargin - icon.getIntrinsicWidth();
                 int iconRight = itemView.getRight() - iconMargin;
                 icon.setBounds(iconLeft, iconTop, iconRight, iconBottom);
-
                 background.setBounds(itemView.getRight() + ((int) dX) - backgroundCornerOffset,
                         itemView.getTop(), itemView.getRight(), itemView.getBottom());
             } else {

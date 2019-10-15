@@ -4,7 +4,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainFragment">
+    tools:context=".ui.main.MainFragment"
+    android:padding="0dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
