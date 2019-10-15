@@ -2,21 +2,11 @@
     <string name="app_name">Jargogle</string>
     <string name="add_new_jargogle">Add new jargogle</string>
     <string name="settings">Settings</string>
-    <string name="data_dummy">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-        ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-        in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-        id est laborum.
-    </string>
     <string name="jargogle_decoded">Decoded</string>
     <string name="jargogle_encoded">Encoded</string>
     <string name="max_width_title_input_text">You have reached 23 chars length limit!</string>
     <string name="default_jargogle_title">Your first jargogle!</string>
-    <string name="default_jargogle_data">Example jargogle data
-        which contains some secret info.
-    </string>
+    <string name="default_jargogle_data">Example jargogle data which contains some secret info.</string>
     <string name="send_intent_title">Send to:</string>
     <string name="secret_key">Secret key</string>
     <string name="encoding_key">Encoding key</string>
@@ -31,9 +21,12 @@
     <string name="jargogole_encoded">Can\'t remove encoded jargogle</string>
     <string name="about">About</string>
     <string name="jargogle">Jargogle</string>
-    <string name="created_by_lofibit">Created by LoFiBit</string>
+    <string name="created_by_lofibit">created by LoFiBit</string>
     <string name="title">Title:</string>
     <string name="jargogle_title">Jargogle title</string>
     <string name="data">Data:</string>
     <string name="enter_text">Enter text</string>
+    <string name="jargogle_logo_description">Jargogle logo!</string>
 </resources>
+
+
