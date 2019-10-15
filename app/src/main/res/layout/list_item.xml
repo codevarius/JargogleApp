@@ -5,6 +5,8 @@
     android:id="@+id/item_list_row_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:background="@drawable/list_itm_rounded"
     android:padding="16dp">
 
     <TextView

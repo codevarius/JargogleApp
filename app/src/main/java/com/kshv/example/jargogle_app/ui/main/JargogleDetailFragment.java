@@ -83,7 +83,8 @@ public class JargogleDetailFragment extends Fragment {
                 /*
                 if (titleEditText.getText ().length ()
                         >= getResources ().getInteger (R.integer.max_title_length)){
-                    Toast.makeText (getContext (),R.string.max_width_title_input_text,Toast.LENGTH_LONG).show ();
+                    Toast.makeText (getContext (),
+                    R.string.max_width_title_input_text,Toast.LENGTH_LONG).show ();
                 }
                 */
             }
@@ -104,7 +105,8 @@ public class JargogleDetailFragment extends Fragment {
                 /*
                 if (dataEditText.getText ().length ()
                         >= getResources ().getInteger (R.integer.max_data_length)){
-                    Toast.makeText (getContext (),R.string.max_width_data_input_text,Toast.LENGTH_LONG).show ();
+                    Toast.makeText (getContext (),
+                    R.string.max_width_data_input_text,Toast.LENGTH_LONG).show ();
                 }
                 */
             }
