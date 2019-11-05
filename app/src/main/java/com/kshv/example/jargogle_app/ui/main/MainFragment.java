@@ -155,7 +155,7 @@ public class MainFragment extends Fragment {
             super (0, ItemTouchHelper.LEFT);
             icon = ContextCompat.getDrawable (Objects.requireNonNull (
                     getContext ()),R.drawable.ic_delete_by_swipe);
-            background = new ColorDrawable (Color.RED);
+            background = new ColorDrawable (getResources().getColor(R.color.colorAccent));
         }
 
         @Override
@@ -189,7 +189,7 @@ public class MainFragment extends Fragment {
             }
 
             background.draw (c);
-            icon.draw (c);
+            //icon.draw (c);
         }
 
         @Override

@@ -243,6 +243,7 @@ public class JargogleDetailFragment extends Fragment {
                                 dialog.cancel();
                     });
 
+                    builder.setCancelable(false);
                     builder.show();
                 }
 
@@ -292,6 +293,7 @@ public class JargogleDetailFragment extends Fragment {
                                 dialog.cancel();
                             });
 
+                    builder.setCancelable(false);
                     builder.show();
                 }else{
                     titleEditText.setEnabled(true);

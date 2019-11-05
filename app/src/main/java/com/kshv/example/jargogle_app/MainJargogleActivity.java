@@ -6,6 +6,9 @@ import android.app.ActionBar;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.TypefaceSpan;
 
 import com.kshv.example.jargogle_app.ui.main.MainFragment;
 
@@ -21,6 +24,12 @@ public class MainJargogleActivity extends AppCompatActivity {
 
         getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient));
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        SpannableString s = new SpannableString(getResources().getString(R.string.app_name));
+        s.setSpan(new TypefaceSpan("monospace"), 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(s);
+
         getWindow().setNavigationBarColor(Color.TRANSPARENT);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
