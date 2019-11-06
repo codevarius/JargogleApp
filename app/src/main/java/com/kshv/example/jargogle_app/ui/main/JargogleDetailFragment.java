@@ -130,8 +130,10 @@ public class JargogleDetailFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if (chainLenField.getText().length() > 0 && !chainSeedField.getText().toString().equals("")){
-                    chainSeedField.setText(chainSeedField.getText().toString().substring(0,Integer.parseInt(chainLenField.getText().toString())
-                            > chainSeedField.length() ? chainSeedField.length() : Integer.parseInt(chainLenField.getText().toString())));
+                    chainSeedField.setText(chainSeedField.getText().toString()
+                            .substring(0,Integer.parseInt(chainLenField.getText().toString())
+                                    > chainSeedField.length() ? chainSeedField.length()
+                                            : Integer.parseInt(chainLenField.getText().toString())));
                 }else{
                     chainSeedField.getText().clear();
                 }
@@ -149,7 +151,8 @@ public class JargogleDetailFragment extends Fragment {
                     toast.setGravity(Gravity.TOP, 0, 0);
                     toast.show();
                 }else{
-                    chainSeedField.setFilters(new InputFilter[]{new InputFilter.LengthFilter(Integer.parseInt(chainLenField.getText().toString()))});
+                    chainSeedField.setFilters(new InputFilter[]{
+                            new InputFilter.LengthFilter(Integer.parseInt(chainLenField.getText().toString()))});
                 }
             }
 
