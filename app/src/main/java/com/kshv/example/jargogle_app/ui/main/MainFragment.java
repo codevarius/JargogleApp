@@ -202,6 +202,7 @@ public class MainFragment extends Fragment {
             }
             adapter.updateJargogleList (provider.getJargogleList ());
             adapter.notifyItemRemoved (position);
+            onResume();
         }
     }
 }
