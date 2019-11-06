@@ -26,6 +26,7 @@
     <string name="data">data:</string>
     <string name="enter_text">enter txt use en chars</string>
     <string name="details">details</string>
+    <string name="miss_chainlen">set chain len</string>
 </resources>
 
 

@@ -3,6 +3,7 @@ package com.kshv.example.jargogle_app.ui.main;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.ContextThemeWrapper;
@@ -100,13 +101,7 @@ public class JargogleDetailFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                /*
-                if (dataEditText.getText ().length ()
-                        >= getResources ().getInteger (R.integer.max_data_length)){
-                    Toast.makeText (getContext (),
-                    R.string.max_width_data_input_text,Toast.LENGTH_LONG).show ();
-                }
-                */
+
             }
         });
         titleEditText.setText (jargogle.getTitle ());
@@ -122,12 +117,24 @@ public class JargogleDetailFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                jargogle.setChain_len(s.toString());
+                if (s.length() <= 1){
+                    jargogle.setChain_len(s.toString());
+                }else{
+                    chainLenField.setText(s.toString().substring(1));
+                    chainLenField.setSelection(chainLenField.getText().length());
+                    jargogle.setChain_len(s.toString().substring(1));
+                }
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (chainLenField.getText().length() > 0 && !chainSeedField.getText().toString().equals("")){
+                    chainSeedField.setText(chainSeedField.getText().toString().substring(0,Integer.parseInt(chainLenField.getText().toString())
+                            > chainSeedField.length() ? chainSeedField.length() : Integer.parseInt(chainLenField.getText().toString())));
+                }else{
+                    chainSeedField.getText().clear();
+                }
             }
         });
 
@@ -136,7 +143,14 @@ public class JargogleDetailFragment extends Fragment {
         chainSeedField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                if (chainLenField.getText().toString().equals("")){
+                    Toast toast = Toast.makeText(getContext(),
+                            R.string.miss_chainlen, Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.TOP, 0, 0);
+                    toast.show();
+                }else{
+                    chainSeedField.setFilters(new InputFilter[]{new InputFilter.LengthFilter(Integer.parseInt(chainLenField.getText().toString()))});
+                }
             }
 
             @Override
@@ -146,7 +160,9 @@ public class JargogleDetailFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                if (chainLenField.getText().toString().equals("")){
+                    chainSeedField.getText().clear();
+                }
             }
         });
 

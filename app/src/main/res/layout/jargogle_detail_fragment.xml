@@ -22,7 +22,7 @@
 
         <EditText
             android:id="@+id/jargogle_title"
-            android:digits="abcdefghijklmnopqrstuvwxyz "
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -41,7 +41,7 @@
 
         <EditText
             android:id="@+id/jargogle_data"
-            android:digits="abcdefghijklmnopqrstuvwxyz "
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -61,6 +61,7 @@
 
         <EditText
             android:id="@+id/chain_len"
+            android:digits="123456789"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -79,6 +80,7 @@
 
         <EditText
             android:id="@+id/seed"
+            android:digits="123456789"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
