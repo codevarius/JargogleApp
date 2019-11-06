@@ -53,7 +53,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/encrypt"
-        android:contentDescription="@string/jargogle_logo_description" />
+        app:srcCompat="@drawable/encrypt"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

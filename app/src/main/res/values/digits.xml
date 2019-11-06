@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="max_title_length" type="integer">100</item>
+    <item name="max_title_length" type="integer">25</item>
     <item name="max_data_length" type="integer">1500</item>
     <item name="chain_len_limit" type="integer">1</item>
-    <item name="chain_seed_limit" type="integer">10</item>
+    <item name="chain_seed_limit" type="integer">9</item>
     <item name="details_fragment_rows_padding" type="integer">8</item>
 </resources>

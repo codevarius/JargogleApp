@@ -6,7 +6,7 @@ public class Jargogle {
     public static final String JARGOGLE_POSITION = "jargogle.position";
     public static int ENCODED = 1, DECODED = 0;
     private String data = "";
-    private String title = "default title";
+    private String title = "default";
     private String uuid;
     private int encoded;
     private String chain_len, chain_seed;

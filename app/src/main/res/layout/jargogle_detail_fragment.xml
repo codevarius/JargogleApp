@@ -22,6 +22,7 @@
 
         <EditText
             android:id="@+id/jargogle_title"
+            android:digits="abcdefghijklmnopqrstuvwxyz "
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -40,6 +41,7 @@
 
         <EditText
             android:id="@+id/jargogle_data"
+            android:digits="abcdefghijklmnopqrstuvwxyz "
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

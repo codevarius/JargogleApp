@@ -226,16 +226,16 @@ public class JargogleDetailFragment extends Fragment {
                     AlertDialog.Builder builder =
                             new AlertDialog.Builder(new ContextThemeWrapper (
                                     fragment.getActivity (),R.style.AppTheme));
-                    builder.setTitle("Set password:");
+                    builder.setTitle("set pass:");
                     final EditText input = new EditText(fragment.getContext ());
                     input.setInputType(
                             InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     builder.setView(input);
 
-                    builder.setPositiveButton("OK",
+                    builder.setPositiveButton("ok",
                             (dialog, which) -> jargogle.setPasswd (input.getText().toString()));
 
-                    builder.setNegativeButton("Cancel",
+                    builder.setNegativeButton("cancel",
                             (dialog, which) -> {
                                 jargogle.setPasswd ("");
                                 dialog.cancel();
