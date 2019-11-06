@@ -1,17 +1,13 @@
 package com.kshv.example.jargogle_app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ActionBar;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TypefaceSpan;
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.kshv.example.jargogle_app.ui.main.MainFragment;
-
 import java.util.Objects;
 
 public class MainJargogleActivity extends AppCompatActivity {
@@ -21,9 +17,9 @@ public class MainJargogleActivity extends AppCompatActivity {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.main_activity);
 
-
         getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient));
-        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(getSupportActionBar())
+                .setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         SpannableString s = new SpannableString(getResources().getString(R.string.app_name));
         s.setSpan(new TypefaceSpan("monospace"), 0, s.length(),

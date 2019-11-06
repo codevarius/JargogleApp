@@ -5,17 +5,14 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TypefaceSpan;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
 import com.kshv.example.jargogle_app.model.Jargogle;
 import com.kshv.example.jargogle_app.model.JargogleDataProvider;
 import com.kshv.example.jargogle_app.ui.main.JargogleDetailFragment;
-
 import java.util.List;
 import java.util.Objects;
 

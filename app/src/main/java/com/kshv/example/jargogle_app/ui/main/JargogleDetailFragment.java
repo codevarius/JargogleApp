@@ -22,13 +22,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import com.kshv.example.jargogle_app.MainJargogleActivity;
 import com.kshv.example.jargogle_app.R;
 import com.kshv.example.jargogle_app.model.Jargogle;
 import com.kshv.example.jargogle_app.model.JargogleCodeManager;
 import com.kshv.example.jargogle_app.model.JargogleDataProvider;
-
 import java.util.Objects;
 
 public class JargogleDetailFragment extends Fragment {

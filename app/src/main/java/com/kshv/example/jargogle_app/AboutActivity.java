@@ -1,7 +1,5 @@
 package com.kshv.example.jargogle_app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spannable;
@@ -10,8 +8,7 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.TypefaceSpan;
 import android.widget.TextView;
-
-import com.kshv.example.jargogle_app.R;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Objects;
 
