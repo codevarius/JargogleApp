@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="activity_master" type="layout">@layout/tablet_activity</item>
+</resources>

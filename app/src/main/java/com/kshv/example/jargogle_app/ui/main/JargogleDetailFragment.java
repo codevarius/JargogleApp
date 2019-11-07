@@ -79,13 +79,6 @@ public class JargogleDetailFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                /*
-                if (titleEditText.getText ().length ()
-                        >= getResources ().getInteger (R.integer.max_title_length)){
-                    Toast.makeText (getContext (),
-                    R.string.max_width_title_input_text,Toast.LENGTH_LONG).show ();
-                }
-                */
             }
         });
 
@@ -245,7 +238,7 @@ public class JargogleDetailFragment extends Fragment {
                     AlertDialog.Builder builder =
                             new AlertDialog.Builder(new ContextThemeWrapper (
                                     fragment.getActivity (),R.style.AppTheme));
-                    builder.setTitle("set pass:");
+                    builder.setTitle(getResources ().getString(R.string.dlg_set_pass_txt));
                     final EditText input = new EditText(fragment.getContext ());
                     input.setInputType(
                             InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -274,7 +267,7 @@ public class JargogleDetailFragment extends Fragment {
                     AlertDialog.Builder builder =
                             new AlertDialog.Builder(new ContextThemeWrapper(
                                     fragment.getActivity(), R.style.AppTheme));
-                    builder.setTitle("Enter password:");
+                    builder.setTitle(getResources ().getString(R.string.dlg_set_pass_txt));
                     final EditText input = new EditText(getContext());
                     input.setInputType(
                             InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);

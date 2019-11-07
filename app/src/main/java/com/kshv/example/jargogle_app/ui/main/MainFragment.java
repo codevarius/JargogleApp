@@ -1,5 +1,6 @@
 package com.kshv.example.jargogle_app.ui.main;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.drawable.ColorDrawable;
@@ -47,12 +48,6 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate (R.layout.main_fragment, container, false);
         provider = JargogleDataProvider.getInstance (getContext ());
         recyclerView = view.findViewById (R.id.list);
-        /*
-        recyclerView.addItemDecoration (
-                new DividerItemDecoration (Objects.requireNonNull (
-                        getContext ()),DividerItemDecoration.VERTICAL)
-        );
-        */
         adapter = new JargogleRecyclerViewAdapter (provider.getJargogleList ());
         recyclerView.setLayoutManager (new LinearLayoutManager (getActivity ()));
 
@@ -131,9 +126,17 @@ public class MainFragment extends Fragment {
                     R.drawable.ic_encode_list_item : R.drawable.ic_decode_list_item);
             holder.itemView.setOnClickListener (v -> {
                 Intent intent = new Intent (getContext (), JargogleDetailActivity.class);
-                intent.putExtra (
-                        Jargogle.JARGOGLE_POSITION, position);
-                startActivity (intent);
+                intent.putExtra (Jargogle.JARGOGLE_POSITION, position);
+                if(Objects.requireNonNull (getActivity ())
+                        .findViewById (R.id.detail_container) == null) {
+                    startActivity (intent);
+                }else{
+                    Objects.requireNonNull (getFragmentManager ()).beginTransaction ()
+                            .replace (R.id.detail_container,
+                                    JargogleDetailFragment.newInstance (jargogle.getUUID ()))
+                            .commit ();
+                    onResume ();
+                }
             });
         }
 

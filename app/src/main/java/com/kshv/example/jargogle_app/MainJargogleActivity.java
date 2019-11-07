@@ -15,7 +15,7 @@ public class MainJargogleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
-        setContentView (R.layout.main_activity);
+        setContentView (R.layout.activity_master);
 
         getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient));
         Objects.requireNonNull(getSupportActionBar())

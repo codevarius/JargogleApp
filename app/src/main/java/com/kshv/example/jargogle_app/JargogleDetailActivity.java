@@ -23,13 +23,13 @@ public class JargogleDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
+        setContentView (R.layout.jargogle_detail_activity);
 
         SpannableString s = new SpannableString(getResources().getString(R.string.details));
         s.setSpan(new TypefaceSpan("monospace"), 0, s.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         Objects.requireNonNull(getSupportActionBar()).setTitle(s);
 
-        setContentView (R.layout.jargogle_detail_activity);
         boolean incoming_jargogle = getIntent ().getType() != null &&
                 getIntent ().getType().equals("text/plain");
 

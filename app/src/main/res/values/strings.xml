@@ -27,6 +27,7 @@
     <string name="enter_text">enter txt use en chars</string>
     <string name="details">details</string>
     <string name="miss_chainlen">set chain len</string>
+    <string name="dlg_set_pass_txt">set pass:</string>
 </resources>
 
 
