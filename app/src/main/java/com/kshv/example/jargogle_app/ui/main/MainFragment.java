@@ -1,12 +1,9 @@
 package com.kshv.example.jargogle_app.ui.main;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -17,10 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -29,12 +26,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.kshv.example.jargogle_app.AboutActivity;
 import com.kshv.example.jargogle_app.JargogleDetailActivity;
 import com.kshv.example.jargogle_app.JargogleSeekBarListener;
 import com.kshv.example.jargogle_app.R;
 import com.kshv.example.jargogle_app.model.Jargogle;
 import com.kshv.example.jargogle_app.model.JargogleDataProvider;
+
 import java.util.List;
 import java.util.Objects;
 

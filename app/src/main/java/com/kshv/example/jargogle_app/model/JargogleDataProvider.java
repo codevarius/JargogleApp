@@ -4,13 +4,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.kshv.example.jargogle_app.database.JargogleDbHelper;
-import com.kshv.example.jargogle_app.database.JargogleDbScheme;
 import com.kshv.example.jargogle_app.database.JargogleDbScheme.JargogleTable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.kshv.example.jargogle_app.database.JargogleDbScheme.*;
+import static com.kshv.example.jargogle_app.database.JargogleDbScheme.JargogleGradient;
 
 public class JargogleDataProvider {
     private static JargogleDataProvider provider;
