@@ -8,16 +8,17 @@ import android.widget.SeekBar;
 import com.kshv.example.jargogle_app.model.JargogleDataProvider;
 
 public class JargogleSeekBarListener implements SeekBar.OnSeekBarChangeListener {
-    private String hexTop,hexBottom;
-    private SeekBar redBar,greenBar,blueBar;
+    private String hexTop, hexBottom;
+    private SeekBar redBar, greenBar, blueBar;
     private Activity activity;
 
-    public JargogleSeekBarListener(Activity activity,SeekBar ... bars){
+    public JargogleSeekBarListener(Activity activity, SeekBar... bars) {
         this.activity = activity;
         redBar = bars[0];
         greenBar = bars[1];
         blueBar = bars[2];
     }
+
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         //create a new gradient color
@@ -30,7 +31,7 @@ public class JargogleSeekBarListener implements SeekBar.OnSeekBarChangeListener 
                 Color.parseColor(hexBottom),
                 Color.parseColor(hexTop)});
 
-        activity.getWindow().setBackgroundDrawable(gd); //getResources().getDrawable(R.drawable.gradient)
+        activity.getWindow().setBackgroundDrawable(gd);
     }
 
     @Override
@@ -40,7 +41,8 @@ public class JargogleSeekBarListener implements SeekBar.OnSeekBarChangeListener 
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        JargogleDataProvider.getInstance(activity.getApplicationContext()).updateJargogleGrdient(hexTop,hexBottom,redBar.getProgress(),
-                greenBar.getProgress(),blueBar.getProgress());
+        JargogleDataProvider.getInstance(activity.getApplicationContext())
+                .updateJargogleGrdient(hexTop, hexBottom, redBar.getProgress(),
+                        greenBar.getProgress(), blueBar.getProgress());
     }
 }

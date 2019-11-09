@@ -41,20 +41,20 @@ public class JargogleDbHelper extends SQLiteOpenHelper {
                 JargogleGradient.JargogleCols.HEX2 + ", " +
                 JargogleGradient.JargogleCols.R_col + ", " +
                 JargogleGradient.JargogleCols.G_col + ", " +
-                JargogleGradient.JargogleCols. B_col+ ");"
+                JargogleGradient.JargogleCols.B_col + ");"
         );
 
-        db.insert(JargogleGradient.NAME,null,JargogleDataProvider.getJargogleGradientAsContentValues(
-                new String[]{"#000000","#000000"},0,0,0
+        db.insert(JargogleGradient.NAME, null, JargogleDataProvider.getJargogleGradientAsContentValues(
+                new String[]{"#000000", "#000000"}, 0, 0, 0
         ));
 
-        Jargogle defaultJargogle = new Jargogle ();
-        defaultJargogle.setEncoded (Jargogle.DECODED);
-        defaultJargogle.setTitle (context.getString (R.string.default_jargogle_title));
-        defaultJargogle.setData (context.getString (R.string.default_jargogle_data));
+        Jargogle defaultJargogle = new Jargogle();
+        defaultJargogle.setEncoded(Jargogle.DECODED);
+        defaultJargogle.setTitle(context.getString(R.string.default_jargogle_title));
+        defaultJargogle.setData(context.getString(R.string.default_jargogle_data));
 
-        db.insert (JargogleTable.NAME,null,
-                JargogleDataProvider.getJargogleAsContentValues (defaultJargogle));
+        db.insert(JargogleTable.NAME, null,
+                JargogleDataProvider.getJargogleAsContentValues(defaultJargogle));
     }
 
     @Override

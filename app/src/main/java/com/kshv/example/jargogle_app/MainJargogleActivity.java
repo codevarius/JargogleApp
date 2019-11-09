@@ -7,18 +7,20 @@ import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TypefaceSpan;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.kshv.example.jargogle_app.model.JargogleDataProvider;
 import com.kshv.example.jargogle_app.ui.main.MainFragment;
+
 import java.util.Objects;
 
 public class MainJargogleActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate (savedInstanceState);
-        setContentView (R.layout.main_activity);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main_activity);
 
         //create a new gradient color
         String hexTop = JargogleDataProvider.getInstance(getApplicationContext()).getSavedJargogleGradient()[0];
@@ -26,9 +28,9 @@ public class MainJargogleActivity extends AppCompatActivity {
 
         GradientDrawable gd = new GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM, new int[]{
-                        Color.parseColor(hexBottom),
-                        Color.parseColor(hexTop)});
-        getWindow().setBackgroundDrawable(gd); //getResources().getDrawable(R.drawable.gradient)
+                Color.parseColor(hexBottom),
+                Color.parseColor(hexTop)});
+        getWindow().setBackgroundDrawable(gd);
 
         Objects.requireNonNull(getSupportActionBar())
                 .setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -42,9 +44,9 @@ public class MainJargogleActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager ().beginTransaction ()
-                    .replace (R.id.container, MainFragment.newInstance())
-                    .commitNow ();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, MainFragment.newInstance())
+                    .commitNow();
         }
     }
 }

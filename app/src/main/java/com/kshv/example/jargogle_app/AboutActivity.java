@@ -22,31 +22,31 @@ public class AboutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate (savedInstanceState);
-        setContentView (R.layout.activity_about);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_about);
 
         String hexTop = JargogleDataProvider.getInstance(getApplicationContext()).getSavedJargogleGradient()[0];
         Objects.requireNonNull(getSupportActionBar())
                 .setBackgroundDrawable(new ColorDrawable(Color.parseColor(hexTop)));
         getWindow().setStatusBarColor(Color.parseColor(hexTop));
 
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled (true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         SpannableString s = new SpannableString(getResources().getString(R.string.about));
         s.setSpan(new TypefaceSpan("monospace"), 0, s.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         Objects.requireNonNull(getSupportActionBar()).setTitle(s);
 
-        TextView playStoreTextView = findViewById (R.id.play_store_link);
-        Spanned link = fromHtml ("<a href=\"https://play.google.com" +
+        TextView playStoreTextView = findViewById(R.id.play_store_link);
+        Spanned link = fromHtml("<a href=\"https://play.google.com" +
                 "/store/apps/developer?id=LoFiBit\">LoFiBit Google Play</a>");
-        playStoreTextView.setText (link);
-        playStoreTextView.setMovementMethod (LinkMovementMethod.getInstance ());
+        playStoreTextView.setText(link);
+        playStoreTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
-        TextView githubLink = findViewById (R.id.github_link);
-        link = fromHtml ("<a href" +
+        TextView githubLink = findViewById(R.id.github_link);
+        link = fromHtml("<a href" +
                 "=\"https://github.com/codevarius/JargogleApp\">Jargogle on GitHub</a>");
-        githubLink.setText (link);
-        githubLink.setMovementMethod (LinkMovementMethod.getInstance ());
+        githubLink.setText(link);
+        githubLink.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

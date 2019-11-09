@@ -17,72 +17,73 @@ public class JargogleDataProvider {
     private static JargogleDataProvider provider;
     private SQLiteDatabase db;
 
-    public static JargogleDataProvider getInstance(Context context){
-        return provider == null ? new JargogleDataProvider (context) : provider;
+    public static JargogleDataProvider getInstance(Context context) {
+        return provider == null ? new JargogleDataProvider(context) : provider;
     }
 
-    private JargogleDataProvider(Context context){
-        db = new JargogleDbHelper (context).getWritableDatabase ();
+    private JargogleDataProvider(Context context) {
+        db = new JargogleDbHelper(context).getWritableDatabase();
+        provider = this;
     }
 
     public List<Jargogle> getJargogleList() {
-        List<Jargogle> jargogleList = new ArrayList<> ();
-        Cursor cursor = db.query (JargogleTable.NAME,
-                null,null,null,
-                null,null,null);
+        List<Jargogle> jargogleList = new ArrayList<>();
+        Cursor cursor = db.query(JargogleTable.NAME,
+                null, null, null,
+                null, null, null);
 
-        if (cursor.getCount () > 0){
-            cursor.moveToFirst ();
-            while (!cursor.isAfterLast ()){
-                Jargogle jargogle = new Jargogle (cursor.getString (
-                        cursor.getColumnIndex (JargogleTable.JargogleCols.UUID)));
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                Jargogle jargogle = new Jargogle(cursor.getString(
+                        cursor.getColumnIndex(JargogleTable.JargogleCols.UUID)));
 
-                jargogle.setTitle (cursor.getString (
-                        cursor.getColumnIndex (JargogleTable.JargogleCols.TITLE)));
+                jargogle.setTitle(cursor.getString(
+                        cursor.getColumnIndex(JargogleTable.JargogleCols.TITLE)));
 
-                jargogle.setData (cursor.getString (
-                        cursor.getColumnIndex (JargogleTable.JargogleCols.DATA)));
+                jargogle.setData(cursor.getString(
+                        cursor.getColumnIndex(JargogleTable.JargogleCols.DATA)));
 
-                jargogle.setEncoded (cursor.getInt (
-                        cursor.getColumnIndex (JargogleTable.JargogleCols.ENCODED)));
+                jargogle.setEncoded(cursor.getInt(
+                        cursor.getColumnIndex(JargogleTable.JargogleCols.ENCODED)));
 
-                jargogle.setChain_len (cursor.getString (
-                        cursor.getColumnIndex (JargogleTable.JargogleCols.CHAIN_LEN)));
+                jargogle.setChain_len(cursor.getString(
+                        cursor.getColumnIndex(JargogleTable.JargogleCols.CHAIN_LEN)));
 
-                jargogle.setChain_seed (cursor.getString (
-                        cursor.getColumnIndex (JargogleTable.JargogleCols.CHAIN_SEED)));
+                jargogle.setChain_seed(cursor.getString(
+                        cursor.getColumnIndex(JargogleTable.JargogleCols.CHAIN_SEED)));
 
-                jargogle.setPasswd (cursor.getString (
-                        cursor.getColumnIndex (JargogleTable.JargogleCols.PASSWD)));
+                jargogle.setPasswd(cursor.getString(
+                        cursor.getColumnIndex(JargogleTable.JargogleCols.PASSWD)));
 
-                jargogleList.add (jargogle);
-                cursor.moveToNext ();
+                jargogleList.add(jargogle);
+                cursor.moveToNext();
             }
 
-            cursor.close ();
+            cursor.close();
         }
 
         return jargogleList;
     }
 
-    public void addJargogle(Jargogle jargogle){
-        ContentValues contentValues = getJargogleAsContentValues (jargogle);
-        db.insert (JargogleTable.NAME,null,contentValues);
+    public void addJargogle(Jargogle jargogle) {
+        ContentValues contentValues = getJargogleAsContentValues(jargogle);
+        db.insert(JargogleTable.NAME, null, contentValues);
     }
 
-    public static ContentValues getJargogleAsContentValues(Jargogle jargogle){
+    public static ContentValues getJargogleAsContentValues(Jargogle jargogle) {
         ContentValues values = new ContentValues();
         values.put(JargogleTable.JargogleCols.UUID, jargogle.getUUID());
-        values.put(JargogleTable.JargogleCols.TITLE, jargogle.getTitle ());
+        values.put(JargogleTable.JargogleCols.TITLE, jargogle.getTitle());
         values.put(JargogleTable.JargogleCols.DATA, jargogle.getData());
-        values.put(JargogleTable.JargogleCols.ENCODED, jargogle.getEncoded ());
+        values.put(JargogleTable.JargogleCols.ENCODED, jargogle.getEncoded());
         values.put(JargogleTable.JargogleCols.CHAIN_LEN, jargogle.getChain_len());
         values.put(JargogleTable.JargogleCols.CHAIN_SEED, jargogle.getChain_seed());
-        values.put(JargogleTable.JargogleCols.PASSWD, jargogle.getPasswd ());
+        values.put(JargogleTable.JargogleCols.PASSWD, jargogle.getPasswd());
         return values;
     }
 
-    public static ContentValues getJargogleGradientAsContentValues(String[] gradientParts,int r,int g, int b) {
+    public static ContentValues getJargogleGradientAsContentValues(String[] gradientParts, int r, int g, int b) {
         ContentValues values = new ContentValues();
         values.put(JargogleGradient.JargogleCols.ID, 1);
         values.put(JargogleGradient.JargogleCols.HEX1, gradientParts[0]);
@@ -95,7 +96,7 @@ public class JargogleDataProvider {
 
     public Jargogle getJargogleByUUID(String jargogleUUID) {
         Jargogle jargogle = null;
-        Cursor cursor = db.query (JargogleTable.NAME,
+        Cursor cursor = db.query(JargogleTable.NAME,
                 null,
                 JargogleTable.JargogleCols.UUID + " = ?",
                 new String[]{jargogleUUID},
@@ -103,31 +104,31 @@ public class JargogleDataProvider {
                 null,
                 null);
 
-        if (cursor.getCount () > 0){
-            cursor.moveToFirst ();
-            jargogle = new Jargogle (cursor.getString (
-                    cursor.getColumnIndex (JargogleTable.JargogleCols.UUID)));
-            jargogle.setTitle (cursor.getString (
-                    cursor.getColumnIndex (JargogleTable.JargogleCols.TITLE)));
-            jargogle.setData (cursor.getString (
-                    cursor.getColumnIndex (JargogleTable.JargogleCols.DATA)));
-            jargogle.setEncoded (cursor.getInt (
-                    cursor.getColumnIndex (JargogleTable.JargogleCols.ENCODED)));
-            jargogle.setChain_len (cursor.getString (
-                    cursor.getColumnIndex (JargogleTable.JargogleCols.CHAIN_LEN)));
-            jargogle.setChain_seed(cursor.getString (
-                    cursor.getColumnIndex (JargogleTable.JargogleCols.CHAIN_SEED)));
-            jargogle.setPasswd (cursor.getString (
-                    cursor.getColumnIndex (JargogleTable.JargogleCols.PASSWD)));
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            jargogle = new Jargogle(cursor.getString(
+                    cursor.getColumnIndex(JargogleTable.JargogleCols.UUID)));
+            jargogle.setTitle(cursor.getString(
+                    cursor.getColumnIndex(JargogleTable.JargogleCols.TITLE)));
+            jargogle.setData(cursor.getString(
+                    cursor.getColumnIndex(JargogleTable.JargogleCols.DATA)));
+            jargogle.setEncoded(cursor.getInt(
+                    cursor.getColumnIndex(JargogleTable.JargogleCols.ENCODED)));
+            jargogle.setChain_len(cursor.getString(
+                    cursor.getColumnIndex(JargogleTable.JargogleCols.CHAIN_LEN)));
+            jargogle.setChain_seed(cursor.getString(
+                    cursor.getColumnIndex(JargogleTable.JargogleCols.CHAIN_SEED)));
+            jargogle.setPasswd(cursor.getString(
+                    cursor.getColumnIndex(JargogleTable.JargogleCols.PASSWD)));
         }
-        cursor.close ();
+        cursor.close();
         return jargogle;
     }
 
-    public String[] getSavedJargogleGradient(){
+    public String[] getSavedJargogleGradient() {
         String[] gradient = new String[2];
 
-        Cursor cursor = db.query (JargogleGradient.NAME,
+        Cursor cursor = db.query(JargogleGradient.NAME,
                 null,
                 JargogleGradient.JargogleCols.ID + " = 1",
                 null,
@@ -135,20 +136,20 @@ public class JargogleDataProvider {
                 null,
                 null);
 
-        if (cursor.getCount () > 0){
-            cursor.moveToFirst ();
-            gradient[0] = cursor.getString(cursor.getColumnIndex (JargogleGradient.JargogleCols.HEX1));
-            gradient[1] = cursor.getString(cursor.getColumnIndex (JargogleGradient.JargogleCols.HEX2));
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            gradient[0] = cursor.getString(cursor.getColumnIndex(JargogleGradient.JargogleCols.HEX1));
+            gradient[1] = cursor.getString(cursor.getColumnIndex(JargogleGradient.JargogleCols.HEX2));
         }
-        cursor.close ();
+        cursor.close();
 
         return gradient;
     }
 
-    public int[] getSeekBarsPositions(){
+    public int[] getSeekBarsPositions() {
         int[] vals = new int[3];
 
-        Cursor cursor = db.query (JargogleGradient.NAME,
+        Cursor cursor = db.query(JargogleGradient.NAME,
                 null,
                 JargogleGradient.JargogleCols.ID + " = 1",
                 null,
@@ -156,34 +157,34 @@ public class JargogleDataProvider {
                 null,
                 null);
 
-        if (cursor.getCount () > 0){
-            cursor.moveToFirst ();
-            vals[0] = cursor.getInt(cursor.getColumnIndex (JargogleGradient.JargogleCols.R_col));
-            vals[1] = cursor.getInt(cursor.getColumnIndex (JargogleGradient.JargogleCols.G_col));
-            vals[2] = cursor.getInt(cursor.getColumnIndex (JargogleGradient.JargogleCols.B_col));
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            vals[0] = cursor.getInt(cursor.getColumnIndex(JargogleGradient.JargogleCols.R_col));
+            vals[1] = cursor.getInt(cursor.getColumnIndex(JargogleGradient.JargogleCols.G_col));
+            vals[2] = cursor.getInt(cursor.getColumnIndex(JargogleGradient.JargogleCols.B_col));
         }
-        cursor.close ();
+        cursor.close();
         return vals;
     }
 
     public void updateJargogleRecord(Jargogle jargogle) {
-        ContentValues contentValues = getJargogleAsContentValues (jargogle);
-        db.update (JargogleTable.NAME,
+        ContentValues contentValues = getJargogleAsContentValues(jargogle);
+        db.update(JargogleTable.NAME,
                 contentValues,
                 JargogleTable.JargogleCols.UUID + " = ?",
-                new String[]{jargogle.getUUID ()});
+                new String[]{jargogle.getUUID()});
     }
 
-    public void updateJargogleGrdient(String hex1, String hex2,int r,int g, int b){
-        ContentValues contentValues = getJargogleGradientAsContentValues(new String[]{hex1,hex2},r,g,b);
-        db.update (JargogleGradient.NAME,
+    public void updateJargogleGrdient(String hex1, String hex2, int r, int g, int b) {
+        ContentValues contentValues = getJargogleGradientAsContentValues(new String[]{hex1, hex2}, r, g, b);
+        db.update(JargogleGradient.NAME,
                 contentValues,
                 JargogleGradient.JargogleCols.ID + " = 1",
                 null);
     }
 
     public void deleteJargogleRecord(Jargogle jargogle) {
-        db.delete (JargogleTable.NAME,JargogleTable.JargogleCols.UUID + " = ?",
-                new String[]{jargogle.getUUID ()});
+        db.delete(JargogleTable.NAME, JargogleTable.JargogleCols.UUID + " = ?",
+                new String[]{jargogle.getUUID()});
     }
 }

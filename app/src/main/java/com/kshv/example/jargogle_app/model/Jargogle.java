@@ -12,11 +12,11 @@ public class Jargogle {
     private String chain_len, chain_seed;
     private String passwd;
 
-    public Jargogle(){
-        this.uuid = UUID.randomUUID ().toString ();
+    public Jargogle() {
+        this.uuid = UUID.randomUUID().toString();
     }
 
-    Jargogle(String uuid){
+    Jargogle(String uuid) {
         this.uuid = uuid;
     }
 

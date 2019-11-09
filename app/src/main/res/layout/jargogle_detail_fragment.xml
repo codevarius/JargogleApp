@@ -22,9 +22,9 @@
 
         <EditText
             android:id="@+id/jargogle_title"
-            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
             android:ems="10"
             android:hint="@string/jargogle_title"
             android:inputType="textPersonName"
@@ -41,9 +41,9 @@
 
         <EditText
             android:id="@+id/jargogle_data"
-            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
             android:ems="10"
             android:gravity="top|start"
             android:hint="@string/enter_text"
@@ -61,9 +61,9 @@
 
         <EditText
             android:id="@+id/chain_len"
-            android:digits="123456789"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:digits="123456789"
             android:ems="10"
             android:hint="@string/chain_len_hint"
             android:inputType="number"
@@ -80,9 +80,9 @@
 
         <EditText
             android:id="@+id/seed"
-            android:digits="123456789"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:digits="123456789"
             android:ems="10"
             android:hint="@string/seed_hint"
             android:inputType="number"

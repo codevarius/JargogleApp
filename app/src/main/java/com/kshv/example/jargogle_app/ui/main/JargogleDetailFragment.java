@@ -18,20 +18,23 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
 import com.kshv.example.jargogle_app.MainJargogleActivity;
 import com.kshv.example.jargogle_app.R;
 import com.kshv.example.jargogle_app.model.Jargogle;
 import com.kshv.example.jargogle_app.model.JargogleCodeManager;
 import com.kshv.example.jargogle_app.model.JargogleDataProvider;
+
 import java.util.Objects;
 
 public class JargogleDetailFragment extends Fragment {
-    private EditText titleEditText,dataEditText,chainLenField,chainSeedField;
+    private EditText titleEditText, dataEditText, chainLenField, chainSeedField;
     private Jargogle jargogle;
     private Switch encodeSwitch;
     private String resultMessage;
@@ -42,16 +45,16 @@ public class JargogleDetailFragment extends Fragment {
     }
 
     public static JargogleDetailFragment newInstance(String uuid) {
-        return new JargogleDetailFragment (uuid);
+        return new JargogleDetailFragment(uuid);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate (savedInstanceState);
+        super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        Objects.requireNonNull (((AppCompatActivity)
-                Objects.requireNonNull (getActivity ()))
-                .getSupportActionBar ()).setDisplayHomeAsUpEnabled (true);
+        Objects.requireNonNull(((AppCompatActivity)
+                Objects.requireNonNull(getActivity()))
+                .getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -59,44 +62,39 @@ public class JargogleDetailFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate (R.layout.jargogle_detail_fragment,
-                container,false);
+        View view = inflater.inflate(R.layout.jargogle_detail_fragment,
+                container, false);
 
-        Objects.requireNonNull (((AppCompatActivity) Objects.requireNonNull (getActivity ()))
-                .getSupportActionBar ()).setDisplayHomeAsUpEnabled (true);
+        Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity()))
+                .getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         jargogle = JargogleDataProvider
-                .getInstance (getContext ()).getJargogleByUUID(uuid);
+                .getInstance(getContext()).getJargogleByUUID(uuid);
 
-        titleEditText = view.findViewById (R.id.jargogle_title);
-        titleEditText.addTextChangedListener (new TextWatcher () {
+        titleEditText = view.findViewById(R.id.jargogle_title);
+        titleEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                jargogle.setTitle (s.toString ());
+                jargogle.setTitle(s.toString());
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                /*
-                if (titleEditText.getText ().length ()
-                        >= getResources ().getInteger (R.integer.max_title_length)){
-                    Toast.makeText (getContext (),
-                    R.string.max_width_title_input_text,Toast.LENGTH_LONG).show ();
-                }
-                */
             }
         });
 
-        dataEditText = view.findViewById (R.id.jargogle_data);
-        dataEditText.addTextChangedListener (new TextWatcher () {
+        dataEditText = view.findViewById(R.id.jargogle_data);
+        dataEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                jargogle.setData (s.toString ());
+                jargogle.setData(s.toString());
             }
 
             @Override
@@ -104,10 +102,10 @@ public class JargogleDetailFragment extends Fragment {
 
             }
         });
-        titleEditText.setText (jargogle.getTitle ());
-        dataEditText.setText (jargogle.getData ());
+        titleEditText.setText(jargogle.getTitle());
+        dataEditText.setText(jargogle.getData());
 
-        chainLenField = view.findViewById (R.id.chain_len);
+        chainLenField = view.findViewById(R.id.chain_len);
         chainLenField.setText(jargogle.getChain_len());
         chainLenField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -117,9 +115,9 @@ public class JargogleDetailFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length() <= 1){
+                if (s.length() <= 1) {
                     jargogle.setChain_len(s.toString());
-                }else{
+                } else {
                     chainLenField.setText(s.toString().substring(1));
                     chainLenField.setSelection(chainLenField.getText().length());
                     jargogle.setChain_len(s.toString().substring(1));
@@ -129,28 +127,28 @@ public class JargogleDetailFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (chainLenField.getText().length() > 0 && !chainSeedField.getText().toString().equals("")){
+                if (chainLenField.getText().length() > 0 && !chainSeedField.getText().toString().equals("")) {
                     chainSeedField.setText(chainSeedField.getText().toString()
-                            .substring(0,Integer.parseInt(chainLenField.getText().toString())
+                            .substring(0, Integer.parseInt(chainLenField.getText().toString())
                                     > chainSeedField.length() ? chainSeedField.length()
-                                            : Integer.parseInt(chainLenField.getText().toString())));
-                }else{
+                                    : Integer.parseInt(chainLenField.getText().toString())));
+                } else {
                     chainSeedField.getText().clear();
                 }
             }
         });
 
-        chainSeedField = view.findViewById (R.id.seed);
+        chainSeedField = view.findViewById(R.id.seed);
         chainSeedField.setText(jargogle.getChain_seed());
         chainSeedField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                if (chainLenField.getText().toString().equals("")){
+                if (chainLenField.getText().toString().equals("")) {
                     Toast toast = Toast.makeText(getContext(),
                             R.string.miss_chainlen, Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.TOP, 0, 0);
                     toast.show();
-                }else{
+                } else {
                     chainSeedField.setFilters(new InputFilter[]{
                             new InputFilter.LengthFilter(Integer.parseInt(chainLenField.getText().toString()))});
                 }
@@ -163,25 +161,25 @@ public class JargogleDetailFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (chainLenField.getText().toString().equals("")){
+                if (chainLenField.getText().toString().equals("")) {
                     chainSeedField.getText().clear();
                 }
             }
         });
 
-        encodeSwitch = view.findViewById (R.id.jargogle_encryption_switch);
-        encodeSwitch.setChecked (jargogle.getEncoded () == 1);
-        if (encodeSwitch.isChecked()){
+        encodeSwitch = view.findViewById(R.id.jargogle_encryption_switch);
+        encodeSwitch.setChecked(jargogle.getEncoded() == 1);
+        if (encodeSwitch.isChecked()) {
             dataEditText.setEnabled(false);
         }
-        encodeSwitch.setText (encodeSwitch.isChecked ()
-                ? getString (R.string.jargogle_encoded)
-                : getString (R.string.jargogle_decoded)
+        encodeSwitch.setText(encodeSwitch.isChecked()
+                ? getString(R.string.jargogle_encoded)
+                : getString(R.string.jargogle_decoded)
         );
-        encodeSwitch.setOnCheckedChangeListener (new EncodeDecodeSwitchListener (
+        encodeSwitch.setOnCheckedChangeListener(new EncodeDecodeSwitchListener(
                 JargogleDetailFragment.this));
 
-        if (jargogle.getEncoded () == Jargogle.ENCODED){
+        if (jargogle.getEncoded() == Jargogle.ENCODED) {
             titleEditText.setEnabled(false);
             dataEditText.setEnabled(false);
         }
@@ -191,46 +189,47 @@ public class JargogleDetailFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu (menu, inflater);
+        super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.jargogle_detail_menu, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId ()){
+        switch (item.getItemId()) {
             case R.id.delete_jargogle:
-                if (jargogle.getEncoded () < 1){
-                    JargogleDataProvider.getInstance (
-                            getContext ()).deleteJargogleRecord(jargogle);
-                    startActivity (new Intent (getContext (), MainJargogleActivity.class));
-                }else{
-                    Toast toast = Toast.makeText (getContext (),
+                if (jargogle.getEncoded() < 1) {
+                    JargogleDataProvider.getInstance(
+                            getContext()).deleteJargogleRecord(jargogle);
+                    startActivity(new Intent(getContext(), MainJargogleActivity.class));
+                } else {
+                    Toast toast = Toast.makeText(getContext(),
                             R.string.jargogole_encoded, Toast.LENGTH_SHORT);
-                    toast.setGravity (Gravity.TOP, 0, 0);
-                    toast.show ();
+                    toast.setGravity(Gravity.TOP, 0, 0);
+                    toast.show();
                 }
                 return true;
 
             case R.id.send_jargogle:
-                Intent intent = new Intent (Intent.ACTION_SEND);
-                intent.setType ("text/plain");
-                intent.putExtra (Intent.EXTRA_TEXT,jargogle.getData ());
-                startActivity (Intent
-                        .createChooser (intent,getString (R.string.send_intent_title)));
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, jargogle.getData());
+                startActivity(Intent
+                        .createChooser(intent, getString(R.string.send_intent_title)));
                 return true;
 
-            default: return super.onOptionsItemSelected (item);
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
     @Override
     public void onPause() {
-        super.onPause ();
-        JargogleDataProvider.getInstance (
-                getContext ()).updateJargogleRecord(jargogle);
+        super.onPause();
+        JargogleDataProvider.getInstance(
+                getContext()).updateJargogleRecord(jargogle);
     }
 
-    private class EncodeDecodeSwitchListener implements CompoundButton.OnCheckedChangeListener{
+    private class EncodeDecodeSwitchListener implements CompoundButton.OnCheckedChangeListener {
 
         private final JargogleDetailFragment fragment;
 
@@ -240,25 +239,25 @@ public class JargogleDetailFragment extends Fragment {
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked){
-                if (jargogle.getPasswd () == null){
+            if (isChecked) {
+                if (jargogle.getPasswd() == null) {
                     AlertDialog.Builder builder =
-                            new AlertDialog.Builder(new ContextThemeWrapper (
-                                    fragment.getActivity (),R.style.AppTheme));
+                            new AlertDialog.Builder(new ContextThemeWrapper(
+                                    fragment.getActivity(), R.style.AppTheme));
                     builder.setTitle("set pass:");
-                    final EditText input = new EditText(fragment.getContext ());
+                    final EditText input = new EditText(fragment.getContext());
                     input.setInputType(
                             InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     builder.setView(input);
 
                     builder.setPositiveButton("ok",
-                            (dialog, which) -> jargogle.setPasswd (input.getText().toString()));
+                            (dialog, which) -> jargogle.setPasswd(input.getText().toString()));
 
                     builder.setNegativeButton("cancel",
                             (dialog, which) -> {
-                                jargogle.setPasswd ("");
+                                jargogle.setPasswd("");
                                 dialog.cancel();
-                    });
+                            });
 
                     builder.setCancelable(false);
                     builder.show();
@@ -269,7 +268,7 @@ public class JargogleDetailFragment extends Fragment {
                 chainLenField.setEnabled(false);
                 chainSeedField.setEnabled(false);
                 processEncryption();
-            }else{
+            } else {
                 if (jargogle.getPasswd() != null) {
                     AlertDialog.Builder builder =
                             new AlertDialog.Builder(new ContextThemeWrapper(
@@ -312,7 +311,7 @@ public class JargogleDetailFragment extends Fragment {
 
                     builder.setCancelable(false);
                     builder.show();
-                }else{
+                } else {
                     titleEditText.setEnabled(true);
                     dataEditText.setEnabled(true);
                     chainLenField.setEnabled(true);
@@ -322,7 +321,7 @@ public class JargogleDetailFragment extends Fragment {
             }
         }
 
-        private void processDecryption(){
+        private void processDecryption() {
             JargogleCodeManager jargogleCodeManager =
                     new JargogleCodeManager(
                             Long.parseLong(chainLenField.getText()
@@ -350,27 +349,27 @@ public class JargogleDetailFragment extends Fragment {
             toast.show();
         }
 
-        private void processEncryption(){
+        private void processEncryption() {
             JargogleCodeManager jargogleCodeManager =
-                    new JargogleCodeManager (
-                            Long.parseLong(chainLenField.getText ().length () > 0
-                                    ? chainLenField.getText ().toString () : "1"),
-                            Long.parseLong(chainSeedField.getText ().length () > 0
-                                    ? chainSeedField.getText ().toString () : "1"),
+                    new JargogleCodeManager(
+                            Long.parseLong(chainLenField.getText().length() > 0
+                                    ? chainLenField.getText().toString() : "1"),
+                            Long.parseLong(chainSeedField.getText().length() > 0
+                                    ? chainSeedField.getText().toString() : "1"),
                             JargogleCodeManager.ENCODING);
 
-            resultMessage = jargogleCodeManager.getJargogleChain ()
-                    .processChain (dataEditText.getText ().toString ().toLowerCase ());
+            resultMessage = jargogleCodeManager.getJargogleChain()
+                    .processChain(dataEditText.getText().toString().toLowerCase());
             resultMessage = '\0' + resultMessage;
 
-            dataEditText.setText (resultMessage);
-            encodeSwitch.setText (getString (R.string.jargogle_encoded));
-            jargogle.setEncoded (Jargogle.ENCODED);
+            dataEditText.setText(resultMessage);
+            encodeSwitch.setText(getString(R.string.jargogle_encoded));
+            jargogle.setEncoded(Jargogle.ENCODED);
 
-            Toast toast = Toast.makeText (getContext (),
-                    R.string.mes_encoded,Toast.LENGTH_SHORT);
-            toast.setGravity (Gravity.TOP,0,0);
-            toast.show ();
+            Toast toast = Toast.makeText(getContext(),
+                    R.string.mes_encoded, Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.TOP, 0, 0);
+            toast.show();
 
         }
     }

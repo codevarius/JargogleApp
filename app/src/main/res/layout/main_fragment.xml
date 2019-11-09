@@ -4,12 +4,12 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainFragment"
-    android:padding="0dp">
+    android:padding="0dp"
+    tools:context=".ui.main.MainFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
-        android:layoutAnimation="@anim/layout_animation"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layoutAnimation="@anim/layout_animation" />
 </FrameLayout>

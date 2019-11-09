@@ -1,10 +1,10 @@
 package com.kshv.example.jargogle_app.database;
 
 public class JargogleDbScheme {
-    public static class JargogleTable{
+    public static class JargogleTable {
         public static final String NAME = "jargogles";
 
-        public static final class JargogleCols{
+        public static final class JargogleCols {
             public static final String UUID = "uuid";
             public static final String TITLE = "title";
             public static final String DATA = "data";
@@ -15,14 +15,14 @@ public class JargogleDbScheme {
         }
     }
 
-    public static class JargogleGradient{
+    public static class JargogleGradient {
         public static final String NAME = "gradient";
 
-        public static final class JargogleCols{
+        public static final class JargogleCols {
             public static final String ID = "id";
             public static final String HEX1 = "hex1";
             public static final String HEX2 = "hex2";
-            public static final String  R_col = "r_col";
+            public static final String R_col = "r_col";
             public static final String G_col = "g_col";
             public static final String B_col = "b_col";
 

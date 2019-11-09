@@ -32,6 +32,8 @@
     <string name="g">g:</string>
     <string name="b">b:</string>
     <string name="jargogle_list">Jargogle list</string>
+    <string name="send">Send</string>
+    <string name="delete">Delete</string>
 </resources>
 
 
