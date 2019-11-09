@@ -14,4 +14,19 @@ public class JargogleDbScheme {
             public static final String PASSWD = "passwd";
         }
     }
+
+    public static class JargogleGradient{
+        public static final String NAME = "gradient";
+
+        public static final class JargogleCols{
+            public static final String ID = "id";
+            public static final String HEX1 = "hex1";
+            public static final String HEX2 = "hex2";
+            public static final String  R_col = "r_col";
+            public static final String G_col = "g_col";
+            public static final String B_col = "b_col";
+
+
+        }
+    }
 }

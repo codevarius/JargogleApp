@@ -1,10 +1,14 @@
 package com.kshv.example.jargogle_app.ui.main;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,10 +17,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -24,6 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.kshv.example.jargogle_app.AboutActivity;
 import com.kshv.example.jargogle_app.JargogleDetailActivity;
+import com.kshv.example.jargogle_app.JargogleSeekBarListener;
 import com.kshv.example.jargogle_app.R;
 import com.kshv.example.jargogle_app.model.Jargogle;
 import com.kshv.example.jargogle_app.model.JargogleDataProvider;
@@ -43,16 +51,9 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate (R.layout.main_fragment, container, false);
         provider = JargogleDataProvider.getInstance (getContext ());
         recyclerView = view.findViewById (R.id.list);
-        /*
-        recyclerView.addItemDecoration (
-                new DividerItemDecoration (Objects.requireNonNull (
-                        getContext ()),DividerItemDecoration.VERTICAL)
-        );
-        */
         adapter = new JargogleRecyclerViewAdapter (provider.getJargogleList ());
         recyclerView.setLayoutManager (new LinearLayoutManager (getActivity ()));
 
@@ -85,6 +86,35 @@ public class MainFragment extends Fragment {
                 provider.addJargogle (new Jargogle ());
                 adapter.updateJargogleList (provider.getJargogleList ());
                 adapter.notifyItemInserted (provider.getJargogleList ().size ()-1);
+                return true;
+            case R.id.option_color:
+                AlertDialog.Builder builder =
+                        new AlertDialog.Builder(new ContextThemeWrapper(
+                                getActivity(), R.style.AppTheme));
+                builder.setTitle("set col");
+                View view = LayoutInflater.from(getContext()).inflate(R.layout.rgb_selector_view, null);
+                SeekBar redBar = view.findViewById(R.id.seekBarRed);
+                redBar.setMax(230);
+                SeekBar greenBar = view.findViewById(R.id.seekBarGreen);
+                greenBar.setMax(230);
+                SeekBar blueBar = view.findViewById(R.id.seekBarBlue);
+                blueBar.setMax(230);
+
+                int[] seekBarProgresses = JargogleDataProvider.getInstance(getContext()).getSeekBarsPositions();
+                redBar.setProgress(seekBarProgresses[0]);
+                greenBar.setProgress(seekBarProgresses[1]);
+                blueBar.setProgress(seekBarProgresses[2]);
+
+                redBar.setOnSeekBarChangeListener(new JargogleSeekBarListener(getActivity(),redBar,greenBar,blueBar));
+                greenBar.setOnSeekBarChangeListener(new JargogleSeekBarListener(getActivity(),redBar,greenBar,blueBar));
+                blueBar.setOnSeekBarChangeListener(new JargogleSeekBarListener(getActivity(),redBar,greenBar,blueBar));
+
+                builder.setView(view);
+                builder.setNegativeButton("close", (dialog, which) -> {
+
+                });
+                builder.setCancelable(true);
+                builder.show();
                 return true;
             case R.id.option_about:
                 startActivity (new Intent (getContext (), AboutActivity.class));
@@ -151,7 +181,7 @@ public class MainFragment extends Fragment {
             super (0, ItemTouchHelper.LEFT);
             icon = ContextCompat.getDrawable (Objects.requireNonNull (
                     getContext ()),R.drawable.ic_delete_by_swipe);
-            background = new ColorDrawable (getResources().getColor(R.color.colorAccent));
+            background = new ColorDrawable (ContextCompat.getColor(getContext(),R.color.colorAccent));
         }
 
         @Override

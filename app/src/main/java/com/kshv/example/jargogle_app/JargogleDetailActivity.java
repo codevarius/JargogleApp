@@ -1,6 +1,8 @@
 package com.kshv.example.jargogle_app;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -23,6 +25,11 @@ public class JargogleDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
+
+        String hexTop = JargogleDataProvider.getInstance(getApplicationContext()).getSavedJargogleGradient()[0];
+        Objects.requireNonNull(getSupportActionBar())
+                .setBackgroundDrawable(new ColorDrawable(Color.parseColor(hexTop)));
+        getWindow().setStatusBarColor(Color.parseColor(hexTop));
 
         SpannableString s = new SpannableString(getResources().getString(R.string.details));
         s.setSpan(new TypefaceSpan("monospace"), 0, s.length(),

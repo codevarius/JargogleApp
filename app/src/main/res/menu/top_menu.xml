@@ -6,6 +6,10 @@
         android:title="@string/add_new_jargogle"
         app:showAsAction="never" />
     <item
+        android:id="@+id/option_color"
+        android:title="@string/change_color"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/option_about"
         android:title="@string/about"
         app:showAsAction="never" />

@@ -18,7 +18,7 @@
     <string name="seed_hint">seed val</string>
     <string name="wrong_passwd">pass err!</string>
     <string name="jargogole_encoded">remove err</string>
-    <string name="about">set</string>
+    <string name="about">adout</string>
     <string name="jargogle">Jargogle</string>
     <string name="created_by_lofibit">created by LoFiBit</string>
     <string name="title">title:</string>
@@ -27,6 +27,11 @@
     <string name="enter_text">enter txt use en chars</string>
     <string name="details">details</string>
     <string name="miss_chainlen">set chain len</string>
+    <string name="change_color">ch col</string>
+    <string name="r">r:</string>
+    <string name="g">g:</string>
+    <string name="b">b:</string>
+    <string name="jargogle_list">Jargogle list</string>
 </resources>
 
 

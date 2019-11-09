@@ -2,11 +2,14 @@ package com.kshv.example.jargogle_app;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.TypefaceSpan;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.kshv.example.jargogle_app.model.JargogleDataProvider;
 import com.kshv.example.jargogle_app.ui.main.MainFragment;
 import java.util.Objects;
 
@@ -17,7 +20,16 @@ public class MainJargogleActivity extends AppCompatActivity {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.main_activity);
 
-        getWindow().setBackgroundDrawable(getResources().getDrawable(R.drawable.gradient));
+        //create a new gradient color
+        String hexTop = JargogleDataProvider.getInstance(getApplicationContext()).getSavedJargogleGradient()[0];
+        String hexBottom = JargogleDataProvider.getInstance(getApplicationContext()).getSavedJargogleGradient()[1];
+
+        GradientDrawable gd = new GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM, new int[]{
+                        Color.parseColor(hexBottom),
+                        Color.parseColor(hexTop)});
+        getWindow().setBackgroundDrawable(gd); //getResources().getDrawable(R.drawable.gradient)
+
         Objects.requireNonNull(getSupportActionBar())
                 .setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 

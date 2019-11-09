@@ -5,9 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.kshv.example.jargogle_app.database.JargogleDbHelper;
+import com.kshv.example.jargogle_app.database.JargogleDbScheme;
 import com.kshv.example.jargogle_app.database.JargogleDbScheme.JargogleTable;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.kshv.example.jargogle_app.database.JargogleDbScheme.*;
 
 public class JargogleDataProvider {
     private static JargogleDataProvider provider;
@@ -78,6 +81,17 @@ public class JargogleDataProvider {
         return values;
     }
 
+    public static ContentValues getJargogleGradientAsContentValues(String[] gradientParts,int r,int g, int b) {
+        ContentValues values = new ContentValues();
+        values.put(JargogleGradient.JargogleCols.ID, 1);
+        values.put(JargogleGradient.JargogleCols.HEX1, gradientParts[0]);
+        values.put(JargogleGradient.JargogleCols.HEX2, gradientParts[1]);
+        values.put(JargogleGradient.JargogleCols.R_col, r);
+        values.put(JargogleGradient.JargogleCols.G_col, g);
+        values.put(JargogleGradient.JargogleCols.B_col, b);
+        return values;
+    }
+
     public Jargogle getJargogleByUUID(String jargogleUUID) {
         Jargogle jargogle = null;
         Cursor cursor = db.query (JargogleTable.NAME,
@@ -109,12 +123,62 @@ public class JargogleDataProvider {
         return jargogle;
     }
 
+    public String[] getSavedJargogleGradient(){
+        String[] gradient = new String[2];
+
+        Cursor cursor = db.query (JargogleGradient.NAME,
+                null,
+                JargogleGradient.JargogleCols.ID + " = 1",
+                null,
+                null,
+                null,
+                null);
+
+        if (cursor.getCount () > 0){
+            cursor.moveToFirst ();
+            gradient[0] = cursor.getString(cursor.getColumnIndex (JargogleGradient.JargogleCols.HEX1));
+            gradient[1] = cursor.getString(cursor.getColumnIndex (JargogleGradient.JargogleCols.HEX2));
+        }
+        cursor.close ();
+
+        return gradient;
+    }
+
+    public int[] getSeekBarsPositions(){
+        int[] vals = new int[3];
+
+        Cursor cursor = db.query (JargogleGradient.NAME,
+                null,
+                JargogleGradient.JargogleCols.ID + " = 1",
+                null,
+                null,
+                null,
+                null);
+
+        if (cursor.getCount () > 0){
+            cursor.moveToFirst ();
+            vals[0] = cursor.getInt(cursor.getColumnIndex (JargogleGradient.JargogleCols.R_col));
+            vals[1] = cursor.getInt(cursor.getColumnIndex (JargogleGradient.JargogleCols.G_col));
+            vals[2] = cursor.getInt(cursor.getColumnIndex (JargogleGradient.JargogleCols.B_col));
+        }
+        cursor.close ();
+        return vals;
+    }
+
     public void updateJargogleRecord(Jargogle jargogle) {
         ContentValues contentValues = getJargogleAsContentValues (jargogle);
         db.update (JargogleTable.NAME,
                 contentValues,
                 JargogleTable.JargogleCols.UUID + " = ?",
                 new String[]{jargogle.getUUID ()});
+    }
+
+    public void updateJargogleGrdient(String hex1, String hex2,int r,int g, int b){
+        ContentValues contentValues = getJargogleGradientAsContentValues(new String[]{hex1,hex2},r,g,b);
+        db.update (JargogleGradient.NAME,
+                contentValues,
+                JargogleGradient.JargogleCols.ID + " = 1",
+                null);
     }
 
     public void deleteJargogleRecord(Jargogle jargogle) {
