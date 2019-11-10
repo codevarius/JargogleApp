@@ -50,7 +50,6 @@
             android:gravity="top|start"
             android:hint="@string/enter_text"
             android:inputType="textMultiLine"
-            android:maxLength="@integer/max_data_length"
             tools:ignore="Autofill" />
 
         <TextView
