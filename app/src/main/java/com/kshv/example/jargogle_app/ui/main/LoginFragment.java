@@ -2,6 +2,7 @@ package com.kshv.example.jargogle_app.ui.main;
 
 
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,9 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         mFragment = this;
+
+        ((EditText)view.findViewById(R.id.passwd_text)).setInputType(
+                InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
         view.findViewById(R.id.login_button).setOnClickListener(v -> {
             userToVerify = ((EditText) view.findViewById(R.id.login_text)).getText().toString();
