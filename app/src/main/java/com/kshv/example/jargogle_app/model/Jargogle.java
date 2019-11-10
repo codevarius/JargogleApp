@@ -1,5 +1,7 @@
 package com.kshv.example.jargogle_app.model;
 
+import com.kshv.example.jargogle_app.ui.main.LoginFragment;
+
 import java.util.UUID;
 
 public class Jargogle {
@@ -12,8 +14,19 @@ public class Jargogle {
     private String chain_len, chain_seed;
     private String passwd;
 
+    String getOwner() {
+        return owner;
+    }
+
+    void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    private String owner;
+
     public Jargogle() {
         this.uuid = UUID.randomUUID().toString();
+        this.owner = LoginFragment.currentUsr;
     }
 
     Jargogle(String uuid) {

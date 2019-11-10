@@ -2,8 +2,10 @@ package com.kshv.example.jargogle_app.ui.main;
 
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -60,6 +62,17 @@ public class MainFragment extends Fragment {
         itemTouchHelper.attachToRecyclerView(recyclerView);
         recyclerView.setAdapter(adapter);
         setHasOptionsMenu(true);
+
+        //create a new gradient color
+        String hexTop = JargogleDataProvider.getInstance(getContext()).getSavedJargogleGradient(getContext())[0];
+        String hexBottom = JargogleDataProvider.getInstance(getContext()).getSavedJargogleGradient(getContext())[1];
+
+        GradientDrawable gd = new GradientDrawable(
+                GradientDrawable.Orientation.TOP_BOTTOM, new int[]{
+                Color.parseColor(hexBottom),
+                Color.parseColor(hexTop)});
+        Objects.requireNonNull(getActivity()).getWindow().setBackgroundDrawable(gd);
+
         return view;
     }
 
@@ -116,6 +129,11 @@ public class MainFragment extends Fragment {
                 return true;
             case R.id.option_about:
                 startActivity(new Intent(getContext(), AboutActivity.class));
+                return true;
+            case R.id.logoff:
+                Objects.requireNonNull(getFragmentManager()).beginTransaction()
+                        .replace(R.id.container, LoginFragment.newInstance())
+                        .commitNow();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

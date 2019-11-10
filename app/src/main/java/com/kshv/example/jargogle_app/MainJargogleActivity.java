@@ -11,6 +11,7 @@ import android.text.style.TypefaceSpan;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.kshv.example.jargogle_app.model.JargogleDataProvider;
+import com.kshv.example.jargogle_app.ui.main.LoginFragment;
 import com.kshv.example.jargogle_app.ui.main.MainFragment;
 
 import java.util.Objects;
@@ -23,8 +24,8 @@ public class MainJargogleActivity extends AppCompatActivity {
         setContentView(R.layout.main_activity);
 
         //create a new gradient color
-        String hexTop = JargogleDataProvider.getInstance(getApplicationContext()).getSavedJargogleGradient()[0];
-        String hexBottom = JargogleDataProvider.getInstance(getApplicationContext()).getSavedJargogleGradient()[1];
+        String hexTop = JargogleDataProvider.getInstance(getApplicationContext()).getSavedJargogleGradient(getApplicationContext())[0];
+        String hexBottom = JargogleDataProvider.getInstance(getApplicationContext()).getSavedJargogleGradient(getApplicationContext())[1];
 
         GradientDrawable gd = new GradientDrawable(
                 GradientDrawable.Orientation.TOP_BOTTOM, new int[]{
@@ -43,7 +44,11 @@ public class MainJargogleActivity extends AppCompatActivity {
         getWindow().setNavigationBarColor(Color.TRANSPARENT);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
 
-        if (savedInstanceState == null) {
+        if (LoginFragment.currentUsr == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, LoginFragment.newInstance())
+                    .commitNow();
+        } else {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, MainFragment.newInstance())
                     .commitNow();

@@ -8,6 +8,7 @@ import com.kshv.example.jargogle_app.R;
 import com.kshv.example.jargogle_app.database.JargogleDbScheme.JargogleTable;
 import com.kshv.example.jargogle_app.model.Jargogle;
 import com.kshv.example.jargogle_app.model.JargogleDataProvider;
+import com.kshv.example.jargogle_app.ui.main.LoginFragment;
 
 import static com.kshv.example.jargogle_app.database.JargogleDbScheme.*;
 
@@ -31,12 +32,13 @@ public class JargogleDbHelper extends SQLiteOpenHelper {
                 JargogleTable.JargogleCols.CHAIN_LEN + ", " +
                 JargogleTable.JargogleCols.CHAIN_SEED + ", " +
                 JargogleTable.JargogleCols.PASSWD + ", " +
+                JargogleTable.JargogleCols.OWNER + ", " +
                 JargogleTable.JargogleCols.DATA + ");"
         );
 
         db.execSQL("create table " + JargogleGradient.NAME + "(" +
                 " _id integer primary key autoincrement, " +
-                JargogleGradient.JargogleCols.ID + ", " +
+                JargogleGradient.JargogleCols.OWNER + ", " +
                 JargogleGradient.JargogleCols.HEX1 + ", " +
                 JargogleGradient.JargogleCols.HEX2 + ", " +
                 JargogleGradient.JargogleCols.R_col + ", " +
@@ -44,9 +46,17 @@ public class JargogleDbHelper extends SQLiteOpenHelper {
                 JargogleGradient.JargogleCols.B_col + ");"
         );
 
+        db.execSQL("create table " + JargogleUsrProfiles.NAME + "(" +
+                " _id integer primary key autoincrement, " +
+                JargogleUsrProfiles.JargogleCols.USER + ", " +
+                JargogleUsrProfiles.JargogleCols.PASSWD + ");"
+        );
+
+        /*
         db.insert(JargogleGradient.NAME, null, JargogleDataProvider.getJargogleGradientAsContentValues(
-                new String[]{"#000000", "#000000"}, 0, 0, 0
+                new String[]{"#000000", "#000000"}, 0, 0, 0, LoginFragment.currentUsr
         ));
+        */
 
         Jargogle defaultJargogle = new Jargogle();
         defaultJargogle.setEncoded(Jargogle.DECODED);

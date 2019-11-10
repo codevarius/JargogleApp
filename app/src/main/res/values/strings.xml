@@ -34,6 +34,14 @@
     <string name="jargogle_list">Jargogle list</string>
     <string name="send">Send</string>
     <string name="delete">Delete</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="passwd">passwd</string>
+    <string name="login">usr</string>
+    <string name="log_in">log in</string>
+    <string name="new_usr">new usr</string>
+    <string name="wrong_passwd_or_user">wrong passwd or usr</string>
+    <string name="user_exists">usr exists</string>
+    <string name="logout">logout</string>
 </resources>
 
 

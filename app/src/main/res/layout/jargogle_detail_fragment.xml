@@ -24,7 +24,6 @@
             android:id="@+id/jargogle_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
             android:ems="10"
             android:hint="@string/jargogle_title"
             android:inputType="textPersonName"
@@ -39,11 +38,14 @@
             android:text="@string/data"
             android:textSize="20sp" />
 
+        <!--
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
+        -->
+
         <EditText
             android:id="@+id/jargogle_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
             android:ems="10"
             android:gravity="top|start"
             android:hint="@string/enter_text"

@@ -6,6 +6,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.widget.SeekBar;
 
 import com.kshv.example.jargogle_app.model.JargogleDataProvider;
+import com.kshv.example.jargogle_app.ui.main.LoginFragment;
 
 public class JargogleSeekBarListener implements SeekBar.OnSeekBarChangeListener {
     private String hexTop, hexBottom;
@@ -42,7 +43,7 @@ public class JargogleSeekBarListener implements SeekBar.OnSeekBarChangeListener 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         JargogleDataProvider.getInstance(activity.getApplicationContext())
-                .updateJargogleGrdient(hexTop, hexBottom, redBar.getProgress(),
-                        greenBar.getProgress(), blueBar.getProgress());
+                .updateJargogleGradient(hexTop, hexBottom, redBar.getProgress(),
+                        greenBar.getProgress(), blueBar.getProgress(), LoginFragment.currentUsr);
     }
 }

@@ -13,4 +13,8 @@
         android:id="@+id/option_about"
         android:title="@string/about"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/logoff"
+        android:title="@string/logout"
+        app:showAsAction="never" />
 </menu>

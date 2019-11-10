@@ -12,6 +12,7 @@ public class JargogleDbScheme {
             public static final String CHAIN_LEN = "chain_len";
             public static final String CHAIN_SEED = "chain_seed";
             public static final String PASSWD = "passwd";
+            public static final String OWNER = "owner";
         }
     }
 
@@ -19,14 +20,21 @@ public class JargogleDbScheme {
         public static final String NAME = "gradient";
 
         public static final class JargogleCols {
-            public static final String ID = "id";
             public static final String HEX1 = "hex1";
             public static final String HEX2 = "hex2";
             public static final String R_col = "r_col";
             public static final String G_col = "g_col";
             public static final String B_col = "b_col";
+            public static final String OWNER = "owner";
+        }
+    }
 
+    public static class JargogleUsrProfiles {
+        public static final String NAME = "users";
 
+        public static final class JargogleCols {
+            public static final String USER = "user";
+            public static final String PASSWD = "passwd";
         }
     }
 }

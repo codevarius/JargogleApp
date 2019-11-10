@@ -7,11 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.kshv.example.jargogle_app.database.JargogleDbHelper;
 import com.kshv.example.jargogle_app.database.JargogleDbScheme.JargogleTable;
+import com.kshv.example.jargogle_app.ui.main.LoginFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.kshv.example.jargogle_app.database.JargogleDbScheme.JargogleGradient;
+import static com.kshv.example.jargogle_app.database.JargogleDbScheme.JargogleUsrProfiles;
 
 public class JargogleDataProvider {
     private static JargogleDataProvider provider;
@@ -29,7 +31,7 @@ public class JargogleDataProvider {
     public List<Jargogle> getJargogleList() {
         List<Jargogle> jargogleList = new ArrayList<>();
         Cursor cursor = db.query(JargogleTable.NAME,
-                null, null, null,
+                null, JargogleTable.JargogleCols.OWNER + " = '" + LoginFragment.currentUsr + "'", null,
                 null, null, null);
 
         if (cursor.getCount() > 0) {
@@ -56,6 +58,9 @@ public class JargogleDataProvider {
                 jargogle.setPasswd(cursor.getString(
                         cursor.getColumnIndex(JargogleTable.JargogleCols.PASSWD)));
 
+                jargogle.setOwner(cursor.getString(
+                        cursor.getColumnIndex(JargogleTable.JargogleCols.OWNER)));
+
                 jargogleList.add(jargogle);
                 cursor.moveToNext();
             }
@@ -80,17 +85,25 @@ public class JargogleDataProvider {
         values.put(JargogleTable.JargogleCols.CHAIN_LEN, jargogle.getChain_len());
         values.put(JargogleTable.JargogleCols.CHAIN_SEED, jargogle.getChain_seed());
         values.put(JargogleTable.JargogleCols.PASSWD, jargogle.getPasswd());
+        values.put(JargogleTable.JargogleCols.OWNER, jargogle.getOwner());
         return values;
     }
 
-    public static ContentValues getJargogleGradientAsContentValues(String[] gradientParts, int r, int g, int b) {
+    private static ContentValues getJargogleGradientAsContentValues(String[] gradientParts, int r, int g, int b, String currentUsr) {
         ContentValues values = new ContentValues();
-        values.put(JargogleGradient.JargogleCols.ID, 1);
         values.put(JargogleGradient.JargogleCols.HEX1, gradientParts[0]);
         values.put(JargogleGradient.JargogleCols.HEX2, gradientParts[1]);
         values.put(JargogleGradient.JargogleCols.R_col, r);
         values.put(JargogleGradient.JargogleCols.G_col, g);
         values.put(JargogleGradient.JargogleCols.B_col, b);
+        values.put(JargogleGradient.JargogleCols.OWNER, currentUsr);
+        return values;
+    }
+
+    private static ContentValues getJargogleUsrProfileAsContentValues(String[] loginData) {
+        ContentValues values = new ContentValues();
+        values.put(JargogleUsrProfiles.JargogleCols.USER, loginData[0]);
+        values.put(JargogleUsrProfiles.JargogleCols.PASSWD, loginData[1]);
         return values;
     }
 
@@ -120,17 +133,19 @@ public class JargogleDataProvider {
                     cursor.getColumnIndex(JargogleTable.JargogleCols.CHAIN_SEED)));
             jargogle.setPasswd(cursor.getString(
                     cursor.getColumnIndex(JargogleTable.JargogleCols.PASSWD)));
+            jargogle.setOwner(cursor.getString(
+                    cursor.getColumnIndex(JargogleTable.JargogleCols.OWNER)));
         }
         cursor.close();
         return jargogle;
     }
 
-    public String[] getSavedJargogleGradient() {
-        String[] gradient = new String[2];
+    public String[] getSavedJargogleGradient(Context context) {
+        String[] gradient = new String[]{"#000000", "#000000"};
 
         Cursor cursor = db.query(JargogleGradient.NAME,
                 null,
-                JargogleGradient.JargogleCols.ID + " = 1",
+                JargogleGradient.JargogleCols.OWNER + " = '" + LoginFragment.currentUsr + "'",
                 null,
                 null,
                 null,
@@ -140,10 +155,19 @@ public class JargogleDataProvider {
             cursor.moveToFirst();
             gradient[0] = cursor.getString(cursor.getColumnIndex(JargogleGradient.JargogleCols.HEX1));
             gradient[1] = cursor.getString(cursor.getColumnIndex(JargogleGradient.JargogleCols.HEX2));
+        } else {
+            JargogleDataProvider.getInstance(context).insertNewGradient(gradient);
         }
         cursor.close();
 
         return gradient;
+    }
+
+    public void insertNewGradient(String[] gradient) {
+        ContentValues contentValues = getJargogleGradientAsContentValues(
+                new String[]{gradient[0], gradient[1]}, 0, 0, 0, LoginFragment.currentUsr
+        );
+        db.insert(JargogleGradient.NAME, null, contentValues);
     }
 
     public int[] getSeekBarsPositions() {
@@ -151,7 +175,7 @@ public class JargogleDataProvider {
 
         Cursor cursor = db.query(JargogleGradient.NAME,
                 null,
-                JargogleGradient.JargogleCols.ID + " = 1",
+                JargogleGradient.JargogleCols.OWNER + " = '" + LoginFragment.currentUsr + "'",
                 null,
                 null,
                 null,
@@ -175,16 +199,62 @@ public class JargogleDataProvider {
                 new String[]{jargogle.getUUID()});
     }
 
-    public void updateJargogleGrdient(String hex1, String hex2, int r, int g, int b) {
-        ContentValues contentValues = getJargogleGradientAsContentValues(new String[]{hex1, hex2}, r, g, b);
+    public void updateJargogleGradient(String hex1, String hex2, int r, int g, int b, String userToCreate) {
+        ContentValues contentValues = getJargogleGradientAsContentValues(new String[]{hex1, hex2}, r, g, b, userToCreate);
         db.update(JargogleGradient.NAME,
                 contentValues,
-                JargogleGradient.JargogleCols.ID + " = 1",
+                JargogleGradient.JargogleCols.OWNER + " = '" + userToCreate + "'",
                 null);
     }
 
     public void deleteJargogleRecord(Jargogle jargogle) {
         db.delete(JargogleTable.NAME, JargogleTable.JargogleCols.UUID + " = ?",
                 new String[]{jargogle.getUUID()});
+    }
+
+    public boolean verifyUser(String userToVerify, String passwdToVerify) {
+        boolean verified = false;
+
+        Cursor cursor = db.query(JargogleUsrProfiles.NAME,
+                null,
+                JargogleUsrProfiles.JargogleCols.USER + " = '" + userToVerify + "'",
+                null,
+                null,
+                null,
+                null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            String passwd = cursor.getString(cursor.getColumnIndex(JargogleUsrProfiles.JargogleCols.PASSWD));
+            if (passwdToVerify.equals(passwd)) {
+                verified = true;
+            }
+        }
+        cursor.close();
+        return verified;
+    }
+
+    public void createNewUsr(String userToCreate, String passwdToAssign) {
+        ContentValues contentValues = getJargogleUsrProfileAsContentValues(new String[]{userToCreate, passwdToAssign});
+        db.insert(JargogleUsrProfiles.NAME, null, contentValues);
+    }
+
+    public boolean checkUserExists(String userToCreate) {
+        Cursor cursor = db.query(JargogleUsrProfiles.NAME,
+                null,
+                JargogleUsrProfiles.JargogleCols.USER + " = '" + userToCreate + "'",
+                null,
+                null,
+                null,
+                null);
+
+        if (cursor.getCount() > 0) {
+            cursor.close();
+            return true;
+        } else {
+            cursor.close();
+            return false;
+        }
+
     }
 }

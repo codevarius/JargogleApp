@@ -29,7 +29,7 @@ public class JargogleDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String hexTop = JargogleDataProvider.getInstance(getApplicationContext()).getSavedJargogleGradient()[0];
+        String hexTop = JargogleDataProvider.getInstance(getApplicationContext()).getSavedJargogleGradient(getApplicationContext())[0];
         Objects.requireNonNull(getSupportActionBar())
                 .setBackgroundDrawable(new ColorDrawable(Color.parseColor(hexTop)));
         getWindow().setStatusBarColor(Color.parseColor(hexTop));

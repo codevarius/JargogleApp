@@ -25,7 +25,7 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-        String hexTop = JargogleDataProvider.getInstance(getApplicationContext()).getSavedJargogleGradient()[0];
+        String hexTop = JargogleDataProvider.getInstance(getApplicationContext()).getSavedJargogleGradient(getApplicationContext())[0];
         Objects.requireNonNull(getSupportActionBar())
                 .setBackgroundDrawable(new ColorDrawable(Color.parseColor(hexTop)));
         getWindow().setStatusBarColor(Color.parseColor(hexTop));
